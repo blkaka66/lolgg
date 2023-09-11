@@ -4,12 +4,13 @@ const ButtonComponent = ({
                     text = "",
                     buttonSize = "4",
                     textSize = "text-sm",
-                    iconSize = "4",
-                    iconPosition = "before",
+                    // iconSize = "4",
+                    // iconPosition = "before",
                     isDisabled = false,
                     onClick = null,
                 }) => {
     const buttonClasses = `border-2 border-red-100 w-${buttonSize} h-${buttonSize} bg-red-50`;
+
 
     return (
         <button
