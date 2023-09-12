@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ButtonComponent = ({
+
                     text = "",
                     buttonSize = "4",
                     textSize = "text-sm",
