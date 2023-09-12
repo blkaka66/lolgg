@@ -1,4 +1,4 @@
-
+import { AiFillCaretDown } from "react-icons/ai";
 
 import ButtonComponent from "./components/button/button"
 
@@ -13,13 +13,13 @@ function App() {
 
             <ButtonComponent
                 text="ㅎㅇㅎㅇ"
-                buttonSize = "8"
-                textSize = "text-lg"
-                iconSize = "4"
+                buttonSize = "16"
+                textSize = "text-xl"
+                icon={<AiFillCaretDown />}
                 onClick={onclick11}
             />
 
-        </div>
+       </div>
             )
     }
 
