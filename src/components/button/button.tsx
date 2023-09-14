@@ -4,7 +4,7 @@ interface ButtonProps {
     text: string;
     buttonSize: string;
     textSize: string;
-    icon: JSX.Element | null;
+    icon: JSX.Element ;
     iconSize: string;
     iconPosition: string;
     isDisabled: boolean;
