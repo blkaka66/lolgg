@@ -1,31 +1,44 @@
 import React from 'react';
 
-const ButtonComponent = ({
+interface ButtonProps {
+    text: string;
+    buttonSize: string;
+    textSize: string;
+    icon: JSX.Element | null;
+    iconSize: string;
+    iconPosition: string;
+    isDisabled: boolean;
+    onClick: () => void;
+}
 
-                    text = "",
-                    buttonSize = "4",
-                    textSize = "text-sm",
-                    icon = null,
-                    // iconSize = "4",
-                    // iconPosition = "before",
-                    isDisabled = false,
-                    onClick = null,
-                }) => {
-    const buttonClasses = `flex-auto border-2 border-red-100 w-${buttonSize} h-${buttonSize} bg-red-50`;
+const ButtonComponent = ({
+                             text = "",
+                             buttonSize = "12px",
+                             textSize = "text-sm",
+                             icon = null,
+                             iconSize = "28px",
+                             iconPosition = "before",
+                             isDisabled = false,
+                             onClick = () => {}
+                         }: ButtonProps) => {
+    const buttonStyle = {
+        width: buttonSize,
+        height: buttonSize,
+    };
+
+    const buttonClasses = `flex flex-auto border-2 border-red-100 bg-red-50`;
 
     return (
-
-            <button
-                className={buttonClasses}
-                disabled={isDisabled}
-                onClick={onClick}
-            >
-                {icon && <div>{icon}</div>}
-                {/*{iconPosition === "before" && <span className={iconSize}></span>}*/}
-                {textSize !== "none" && <span className={`${textSize}`}>{text}</span>}
-                {/*{iconPosition === "after" && <span className={`icon icon-${iconSize}`}></span>}*/}
-            </button>
-
+        <button
+            style={buttonStyle}
+            className={buttonClasses}
+            disabled={isDisabled}
+            onClick={onClick}
+        >
+            {icon && iconPosition === "before" && <span style={{ fontSize: iconSize }}>{icon}</span>}
+            {textSize !== "none" && <span className={`${textSize}`}>{text}</span>}
+            {icon && iconPosition === "after" && <span style={{ fontSize: iconSize }}>{icon}</span>}
+        </button>
     );
 }
 

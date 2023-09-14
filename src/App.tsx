@@ -9,16 +9,17 @@ function App() {
     return (
 
 
-        <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
+       // <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
             <ButtonComponent
                 text="ㅎㅇㅎㅇ"
-                buttonSize = "16"
-                textSize = "text-xl"
+                buttonSize = "4"
+                textSize = "text-sm"
                 icon={<AiFillCaretDown />}
+                iconPosition="before"
                 onClick={onclick11}
             />
 
-       </div>
+      // </div>
             )
     }
 
