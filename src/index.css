@@ -38,3 +38,16 @@ body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+.button {
+  @apply flex justify-center items-center rounded-sm
+}
+.button.outlined {
+  @apply border-2 bg-transparent border-amber-300 text-amber-300
+}
+.button.text {
+  @apply border-0 bg-transparent text-amber-300
+}
+.button.contained {
+  @apply border-0 bg-amber-300 text-white
+}
