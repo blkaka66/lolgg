@@ -9,10 +9,20 @@ function App() {
     return (
 
 
-       // <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
-            <ButtonComponent variant="outlined" widthSize={"full"}>안녕하세요</ButtonComponent>
+        <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
+            <ButtonComponent
+                variant="outlined"
+                widthSize={"fit"}
+                icon={AiFillCaretDown}
+                iconSize="40px"
+                iconPosition="after"
+                isDisabled = {false}
+                color = "green"
+            >
+                안녕하세요
+            </ButtonComponent>
 
-      // </div>
+       </div>
             )
     }
 

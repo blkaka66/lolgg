@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import colors from "tailwindcss/colors";
 // import '../../index.css'
 
 // small, medium, large
@@ -9,9 +10,7 @@ interface ButtonProps {
 
     text?: string;
     buttonSize?: string;
-    // small: padding: 4px, textSize: 10px
-    // medium: padding: 4px 4px, textSize: 12px
-    // large: padding: 8px 12px, textSize: 14px
+
     textSize?: string;
     padding?: string;
     widthSize?: 'full' | 'fit' | number
@@ -22,16 +21,20 @@ interface ButtonProps {
     isDisabled?: boolean;
     onClick?: () => void;
     children?: React.ReactNode;
+    color?:string;
 }
 
 type ButtonStyle = {
-  width?: string | undefined
+    width?: string | undefined,
+    border?: string | undefined,
+    backgroundColor?: string | undefined,
+    color?: string | undefined,
 }
 // 1: width: 30px, height: 20px;
 
 // width: fix 된 사이즈 / Content에 맞추거나 / 100%
 const ButtonComponent = ({
-  variant = "text",
+                             variant = "text",
                              textSize = "text-sm",
                              widthSize = "fit",
                              icon = null,
@@ -39,46 +42,71 @@ const ButtonComponent = ({
                              iconPosition = "before",
                              isDisabled = false,
                              onClick = () => { console.log( 'click!' )},
-  children
+                             color="white",
+                             children
                          }: ButtonProps) => {
 
   const [style, setStyle] = useState<ButtonStyle>({})
   useEffect(() => {
+      console.log(isDisabled)
+
     let width: string | undefined = undefined;
     let border: string = '';
-    switch (variant) {
-      case 'text':
-        width = undefined;
-        border = '0px';
-    }
-    switch (widthSize) {
-      case 'full': width = '100%'; break;
-      case 'fit': break;
-      default:
-        width = `${widthSize}px`
-    }
+    let backgroundColor=color;
+    let textColor = '';
+      switch (widthSize) {
+          case 'full': width = '100%'; break;
+          case 'fit': break;
+          default:
+              width = `${widthSize}px`
+      }
+      if(isDisabled){
+          backgroundColor="#ccc";
+          textColor="black"
+      }
+      else{
+          switch (variant) {
+              case 'text':
+                  border = '0px';
+                  break;
+              case 'outlined':
+                  border ='1px solid black';
+                  break;
+              case 'contained':
+                  border ='1px solid black';
+                  textColor="white";
+                  break;
+          }
+
+      }
+
     setStyle(prev => {
       return {
         ...prev,
-        width
+        border,
+        width,
+        backgroundColor,
+        color:textColor,
       }
     })
-  }, [widthSize])
+  }, [widthSize,variant,isDisabled])
 
     // const buttonClasses = `flex flex-auto border-2 border-red-100 bg-red-50 items-center text-center justify-center`;
-    const buttonClasses = `button ${variant}`
+    const buttonClasses = "flex items-center"//flex-end나 flex-auto가 안먹힌다.
 
     return (
-        <button
-            style={style}
-            className={buttonClasses}
-            disabled={isDisabled}
-            onClick={onClick}
-        >
-            {icon && iconPosition === "before" && <span style={{ fontSize: iconSize }}>{icon}</span>}
-            {textSize !== "none" && <span className={`${textSize}`}>{children}</span>}
-            {icon && iconPosition === "after" && <span style={{ fontSize: iconSize }}>{icon}</span>}
-        </button>
+
+            <button
+                style={style}
+                className={buttonClasses}
+                disabled={isDisabled}
+                onClick={onClick}
+            >
+                {icon && iconPosition === "before" && <span style={{ fontSize: iconSize ,paddingRight:"10px"}}>{icon()}</span>}
+                {textSize !== "none" && <span className={`${textSize}`}>{children}</span>}
+                {icon && iconPosition === "after" && <span style={{ fontSize: iconSize ,paddingLeft:"10px"}}>{icon()}</span>}
+            </button>
+
     );
 }
 
