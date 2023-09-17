@@ -67,6 +67,7 @@ const ButtonComponent = ({
       else{
           switch (variant) {
               case 'text':
+                  backgroundColor="white";
                   border = '0px';
                   break;
               case 'outlined':
