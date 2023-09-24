@@ -41,15 +41,15 @@ const ButtonComponent = ({
                              iconSize = "28px",
                              iconPosition = "before",
                              isDisabled = false,
-                             onClick = () => { console.log( 'click!' )},
+                             onClick = (event) => {
+                                 event.stopPropagation();
+                                 console.log( 'click!' ); },
                              color="white",
                              children
                          }: ButtonProps) => {
 
   const [style, setStyle] = useState<ButtonStyle>({})
   useEffect(() => {
-      console.log(isDisabled)
-
     let width: string | undefined = undefined;
     let border: string = '';
     let backgroundColor=color;
@@ -92,7 +92,7 @@ const ButtonComponent = ({
   }, [widthSize,variant,isDisabled])
 
     // const buttonClasses = `flex flex-auto border-2 border-red-100 bg-red-50 items-center text-center justify-center`;
-    const buttonClasses = "flex items-center"//flex-end나 flex-auto가 안먹힌다.
+    const buttonClasses = "relative flex items-center"//flex는 먹히는데 flex-end나 flex-auto가 안먹힌다.
 
     return (
 
