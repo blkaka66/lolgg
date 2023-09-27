@@ -13,9 +13,11 @@ interface ToolTipProps {
 
 interface divStyle {
     position?:string | undefined,
+    backgroundColor?: string | undefined,
+    color?: string | undefined,
 }
 const ToolTipComponent = ({
-                              isDisabled = false,
+                              isDisabled = true,
                               ttPosition = "bottom",
                               size = "medium",
                               bgColor = "white",
@@ -26,6 +28,7 @@ const ToolTipComponent = ({
                           }: ToolTipProps) => {
     const [isHovered, setIsHovered] = useState(false);
     const [style, setStyle] = useState<divStyle>({})
+    const [position , setPosition] =  useState("bottom-12");
     const handleMouseEnter = (event) => {
         setIsHovered(true);
         event.stopPropagation();
@@ -37,44 +40,48 @@ const ToolTipComponent = ({
     };
 
     useEffect(() => {
-        let position='';
+
+        let backgroundColor=bgColor;
+        let color=textColor;
         switch (ttPosition) {
             case "top":
-                position= "top-12";
+                setPosition( "top-12");
                 break;
             case "bottom":
-                position= "bottom-12";
+                setPosition( "bottom-12");
                 break;
             case "left":
-                position= "left-12";
+                setPosition( "left-12");
                 break;
             case "right":
-                position= "right-12";
+                setPosition( "right-12");
                 break;
             default:
-                position= "bottom-12";
+                setPosition( "bottom-12");
                 break;
         }
-        setStyle(prev => {
-            return {
-                ...prev,
-                position
-            }
-        })
 
-    }, [ttPosition]);
+
+        setStyle({
+            ...style,
+        
+            color
+        });
+
+    }, [ttPosition, isDisabled]);
 
 
     return (
+
         <span
             style = {style}
-            className={`absolute w-auto h-auto  bg-black text-center z-50 `}
+            className={`${position} absolute w-auto h-auto  text-center z-50 `}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-      <span className={`${isHovered ? "visible" : "invisible"}`}>
-        {children}
-      </span>
+        <span className={`${isHovered ? "visible" : "invisible"}`}>
+            {isDisabled === true ? "볼 수 없습니다." : children}
+        </span>
         </span>
     );
 };

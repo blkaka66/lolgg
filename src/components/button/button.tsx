@@ -57,7 +57,7 @@ const ButtonComponent = ({
       switch (widthSize) {
           case 'full': width = '100%'; break;
           case 'fit': break;
-          default:
+          default:3
               width = `${widthSize}px`
       }
       if(isDisabled){
