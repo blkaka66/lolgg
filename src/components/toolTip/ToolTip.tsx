@@ -110,7 +110,7 @@ const ToolTipComponent = ({
     }, [ttPosition, isDisabled,size]);
 
     const handleClick = () => {
-        // 클릭 이벤트 처리 로직을 여기에 추가
+       
         console.log('클릭 이벤트가 발생했습니다.');
     };
 
