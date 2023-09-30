@@ -1,7 +1,7 @@
 import { AiFillCaretDown } from "react-icons/ai";
 
 import ButtonComponent from "./components/button/button"
-import ToolTipComponent from "./components/toolTip/ToolTip.tsx";
+import ToolTipComponent from "./components/toolTip/ToolTip";
 function App() {
     const onclick11 = () =>{
         console.log("안녕하세요");
@@ -9,17 +9,17 @@ function App() {
     return (
 
 
-        <div className="relative border-4 border-red-100 relative h-screen text-center p-10 text-xl">
+        <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
             <ButtonComponent
-                variant="outlined"
+                variant="contained"
                 widthSize={"fit"}
                 icon={AiFillCaretDown}
                 iconSize="40px"
                 iconPosition="after"
                 isDisabled = {false}
-                color = "white"
+                color = "green"
             >
-                안녕하세요 <ToolTipComponent> ggg </ToolTipComponent>
+                안녕하세요<ToolTipComponent>툴팁</ToolTipComponent>
             </ButtonComponent>
 
        </div>
