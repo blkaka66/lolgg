@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 interface ToolTipProps {
+    title: string;
     ttPosition?: "top" | "bottom" | "left" | "right";
     isDisabled?: boolean;
     size?: string;
@@ -17,20 +18,22 @@ interface divStyle {
     color?: string | undefined,
 }
 const ToolTipComponent = ({
+                              title,
                               isDisabled = false,
                               ttPosition = "left",
                               size = "medium",
                               bgColor = "white",
                               textColor = "black",
                               trigger = "hover",
-                              followCursor = true,
+                              followCursor = false,
                               children,
                           }: ToolTipProps) => {
     const [isHovered, setIsHovered] = useState(false);
     const [style, setStyle] = useState<divStyle>({})
     const [position , setPosition] =  useState("bottom-12");
-    const [width , setWidth] =useState("w-4");
-    const [height , setHeight] =useState("h-4");
+    const [id, setId] = useState<number>(parseInt(String(Math.random() * 1000)));
+    // const [width , setWidth] =useState("w-4");
+    // const [height , setHeight] =useState("h-4");
     const handleMouseEnter = (event) => {
         setIsHovered(true);
         event.stopPropagation();
@@ -44,7 +47,7 @@ const ToolTipComponent = ({
     useEffect(() => {
 
         let backgroundColor=bgColor;
-        let color=textColor;
+        const color = textColor;
         switch (ttPosition) {
             case "top":
                 setPosition("top-12");
@@ -53,7 +56,7 @@ const ToolTipComponent = ({
                 setPosition("bottom-12");
                 break;
             case "left":
-                setPosition("left-12");
+                setPosition("left-0 top-[-20px]");
                 break;
             case "right":
                 setPosition("right-12");
@@ -63,51 +66,55 @@ const ToolTipComponent = ({
                 break;
         }
 
-        switch (size) {
-            case "small":
-                setWidth( "w-4");
-                setHeight("h-4");
-                break;
-            case "medium":
-                setWidth( "w-8");
-                setHeight("h-8");
-                break;
-            case "large":
-                setWidth( "w-12");
-                setHeight("h-12");
-                break;
-            default:
-                setWidth( "w-4");
-                setHeight("h-4");
-                break;
-
-
-        }
+        // switch (size) {
+        //     case "small":
+        //         setWidth( "w-4");
+        //         setHeight("h-4");
+        //         break;
+        //     case "medium":
+        //         setWidth( "w-8");
+        //         setHeight("h-8");
+        //         break;
+        //     case "large":
+        //         setWidth( "w-12");
+        //         setHeight("h-12");
+        //         break;
+        //     default:
+        //         setWidth( "w-4");
+        //         setHeight("h-4");
+        //         break;
+        //
+        //
+        // }
 
 
         setStyle({
             ...style,
-
             color
         });
 
 
         const handleMouseMove = (event: MouseEvent) => {
-            const tooltip = document.getElementById("tooltip");
+            const tooltip = document.getElementById(`tooltip_${id}`);
             if (tooltip) {
                 const rect = tooltip.getBoundingClientRect();
                 const x = event.pageX;
                 const y = event.pageY;
-                tooltip.style.transform = `translate(${x}px, ${y}px)`;
+                tooltip.style.position = "sticky";
+                tooltip.style.left = `${x}px`;
+                tooltip.style.top = `${y}px`;
+                //tooltip.style.transform = `translate(${x}px, ${y}px)`;
             }
         };
-        if (followCursor) {
+        if (followCursor && isHovered) {
             window.addEventListener("mousemove", handleMouseMove);
+        } else if(followCursor && !isHovered) {
+            window.removeEventListener("mousemove", handleMouseMove);
         }
         return () =>{
             window.removeEventListener("mousemove", handleMouseMove);
         };
-    }, [ttPosition, isDisabled,size]);
+    }, [isHovered, ttPosition, isDisabled,size]);
 
     const handleClick = () => {
        
@@ -115,21 +122,27 @@ const ToolTipComponent = ({
     };
 
     return (
-
-        <span
-            id = "tooltip"
-            style = {style}
-            className={`${position} absolute ${width} ${height} text-center z-50 `}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-        {trigger === "hover" && <span className={`${isHovered ? "visible" : "invisible"}`}>
-            {isDisabled === true ? "볼 수 없습니다." : children}
-        </span>}
-        {trigger === "click" && <span className={`${isHovered ? "visible" : "invisible"}` }>
-         {isDisabled === true ? "볼 수 없습니다." : children}
-        </span>}
-        </span>
+      <span className={"relative inline-block"}>
+                <span
+                  id={`tooltip_${id}`}
+                  style={style}
+                  className={`${position} absolute text-center z-50 `}
+                  // className={`${position} absolute ${width} ${height} text-center z-50 `}
+                >
+                    {trigger === "hover" && <span className={`${isHovered ? "visible" : "invisible"}`}>
+                        {isDisabled === true ? "볼 수 없습니다." : title}
+                    </span>}
+                    {trigger === "click" && <span className={`${isHovered ? "visible" : "invisible"}`}>
+                     {isDisabled === true ? "볼 수 없습니다." : title}
+                    </span>}
+                </span>
+                <span
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                    {children}
+                </span>
+            </span>
     );
 };
 

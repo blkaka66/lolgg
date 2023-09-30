@@ -10,6 +10,8 @@ function App() {
 
 
         <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
+          {/* 툴팁 1 */}
+          <ToolTipComponent title="툴팁내용">
             <ButtonComponent
                 variant="contained"
                 widthSize={"fit"}
@@ -19,9 +21,14 @@ function App() {
                 isDisabled = {false}
                 color = "green"
             >
-                안녕하세요<ToolTipComponent>툴팁</ToolTipComponent>
+                안녕하세요
             </ButtonComponent>
+          </ToolTipComponent>
 
+          {/* 툴팁 2 */}
+          <ToolTipComponent title={"툴팁!!"}>
+            <div>마우스를 올리면 툴팁이 보여요!</div>
+          </ToolTipComponent>
        </div>
             )
     }
