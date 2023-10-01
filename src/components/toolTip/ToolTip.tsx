@@ -56,10 +56,10 @@ const ToolTipComponent = ({
         const color = textColor;
         switch (ttPosition) {
             case "top":
-                setPosition(" -top-4");//포지션이 안바뀜 left-0만 먹히고 나머지는 아예안먹힘
+                setPosition("-top-4");//포지션이 안바뀜 left만 먹히고 나머지는 아예안먹힘
                 break;
             case "bottom":
-                setPosition("left-0 -bottom-4");
+                setPosition("-left-4 -bottom-8");
                 break;
             case "left":
                 setPosition("-left-4");
