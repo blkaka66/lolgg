@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import {makeRandomNumber} from "../../methods/Utils.ts"
 interface ToolTipProps {
     title: string;
     ttPosition?: "top" | "bottom" | "left" | "right";
@@ -9,7 +9,7 @@ interface ToolTipProps {
     bgColor?: string;
     textColor?: string;
     trigger?: string;
-    followCursor?: boolean;
+
 }
 
 interface divStyle {
@@ -20,29 +20,35 @@ interface divStyle {
 const ToolTipComponent = ({
                               title,
                               isDisabled = false,
-                              ttPosition = "left",
-                              size = "medium",
-                              bgColor = "white",
-                              textColor = "black",
+                              ttPosition = "bottom",
+                              size = "auto",
+                              bgColor = "red",
+                              textColor = "white",
                               trigger = "hover",
-                              followCursor = false,
                               children,
                           }: ToolTipProps) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isAppear, setIsAppear] = useState(false);
     const [style, setStyle] = useState<divStyle>({})
     const [position , setPosition] =  useState("bottom-12");
-    const [id, setId] = useState<number>(parseInt(String(Math.random() * 1000)));
-    // const [width , setWidth] =useState("w-4");
-    // const [height , setHeight] =useState("h-4");
+
+    const [width , setWidth] =useState("w-4");
+    const [height , setHeight] =useState("h-4");
+    const id = makeRandomNumber();
     const handleMouseEnter = (event) => {
-        setIsHovered(true);
+
+        setIsAppear(true);
         event.stopPropagation();
     };
 
     const handleMouseLeave = (event) => {
-        setIsHovered(false);
+
+        setIsAppear(false);
         event.stopPropagation();
     };
+
+    const handleOnclick = () =>{
+        setIsAppear(!isAppear);
+    }
 
     useEffect(() => {
 
@@ -50,99 +56,94 @@ const ToolTipComponent = ({
         const color = textColor;
         switch (ttPosition) {
             case "top":
-                setPosition("top-12");
+                setPosition(" -top-4");//포지션이 안바뀜 left-0만 먹히고 나머지는 아예안먹힘
                 break;
             case "bottom":
-                setPosition("bottom-12");
+                setPosition("left-0 -bottom-4");
                 break;
             case "left":
-                setPosition("left-0 top-[-20px]");
+                setPosition("-left-4");
                 break;
             case "right":
-                setPosition("right-12");
+                setPosition("-right-4");
                 break;
             default:
-                setPosition("bottom-12");
+                setPosition("-top-12");
                 break;
         }
 
-        // switch (size) {
-        //     case "small":
-        //         setWidth( "w-4");
-        //         setHeight("h-4");
-        //         break;
-        //     case "medium":
-        //         setWidth( "w-8");
-        //         setHeight("h-8");
-        //         break;
-        //     case "large":
-        //         setWidth( "w-12");
-        //         setHeight("h-12");
-        //         break;
-        //     default:
-        //         setWidth( "w-4");
-        //         setHeight("h-4");
-        //         break;
-        //
-        //
-        // }
+        switch (size) {
+            case "auto":
+                setWidth( "w-auto");
+                setHeight("h-auto");
+                break;
+            case "medium":
+                setWidth( "w-8");
+                setHeight("h-8");
+                break;
+            case "large":
+                setWidth( "w-12");
+                setHeight("h-12");
+                break;
+            default:
+                setWidth( "w-auto");
+                setHeight("h-auto");
+                break;
+
+
+        }
 
 
         setStyle({
             ...style,
+            backgroundColor,
             color
         });
 
 
-        const handleMouseMove = (event: MouseEvent) => {
-            const tooltip = document.getElementById(`tooltip_${id}`);
-            if (tooltip) {
-                const rect = tooltip.getBoundingClientRect();
-                const x = event.pageX;
-                const y = event.pageY;
-                tooltip.style.position = "sticky";
-                tooltip.style.left = `${x}px`;
-                tooltip.style.top = `${y}px`;
-                //tooltip.style.transform = `translate(${x}px, ${y}px)`;
-            }
-        };
-        if (followCursor && isHovered) {
-            window.addEventListener("mousemove", handleMouseMove);
-        } else if(followCursor && !isHovered) {
-            window.removeEventListener("mousemove", handleMouseMove);
-        }
-        return () =>{
-            window.removeEventListener("mousemove", handleMouseMove);
-        };
-    }, [isHovered, ttPosition, isDisabled,size]);
+        const element = document.getElementById(`tooltip_${id}`);
 
-    const handleClick = () => {
-       
-        console.log('클릭 이벤트가 발생했습니다.');
-    };
+        if (trigger === "hover" && element) {
+            element.addEventListener("mouseenter", handleMouseEnter);
+            element.addEventListener("mouseleave", handleMouseLeave);
+        }
+        else if(trigger === "click" && element){
+            element.addEventListener("click", handleOnclick);
+            element.addEventListener("mouseleave", handleMouseLeave);
+        }
+
+        return () => {
+            if(trigger === "hover" && element){
+                element.removeEventListener("mouseenter", handleMouseEnter);
+                element.removeEventListener("mouseleave", handleMouseLeave);
+            }
+            else if(trigger === "click" && element){
+                element.removeEventListener("click", handleOnclick);
+                element.removeEventListener("mouseleave", handleMouseLeave);
+            }
+
+        }
+    }, [isAppear, ttPosition, isDisabled,size]);
+
+
 
     return (
-      <span className={"relative inline-block"}>
+        <div     id={`tooltip_${id}`} className={`relative  inline-block`}>
                 <span
-                  id={`tooltip_${id}`}
-                  style={style}
-                  className={`${position} absolute text-center z-50 `}
-                  // className={`${position} absolute ${width} ${height} text-center z-50 `}
+
+                    //className={`${position} absolute text-center z-50 `}
+                    className={`absolute ${position}  ${width} ${height} text-center z-50 `}
                 >
-                    {trigger === "hover" && <span className={`${isHovered ? "visible" : "invisible"}`}>
+                    {trigger === "hover" && <span style={style} className={`${isAppear ? "visible" : "invisible"}`}>
                         {isDisabled === true ? "볼 수 없습니다." : title}
                     </span>}
-                    {trigger === "click" && <span className={`${isHovered ? "visible" : "invisible"}`}>
+                    {trigger === "click" && <span style={style} className={`${isAppear ? "visible" : "invisible"}`}>
                      {isDisabled === true ? "볼 수 없습니다." : title}
                     </span>}
-                </span>
-                <span
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
+                </span
+>
                     {children}
-                </span>
-            </span>
+            </div>
     );
 };
 
