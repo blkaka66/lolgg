@@ -42,8 +42,10 @@ const ButtonComponent = ({
                              iconPosition = "before",
                              isDisabled = false,
                              onClick = (event) => {
-                                 event.stopPropagation();
-                                 console.log( 'click!' ); },
+
+                                 console.log( 'click!' );
+                                 event.stopPropagation();},
+
                              color="white",
                              children
                          }: ButtonProps) => {

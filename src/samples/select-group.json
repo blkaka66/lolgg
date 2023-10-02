@@ -1,4 +1,6 @@
 [
-  {"id": 1,"name": "Samsung","group": "A"},
-  {"id": 2,"name": "Apple","group": "A"}
+  { "value": "'jack" ,"label": "Jack" },
+  { "value": "'lucy", "label": "Lucy" },
+  { "value": "Yimin", "label": "yiminghe" },
+  { "value": "disab", "label": "Disabled", "disabled": true }
 ]

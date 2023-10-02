@@ -11,7 +11,7 @@ interface ToolTipProps {
     trigger?: string;
 
 }
-
+//포지션 문제 해결되면 삼각형 만들어보기
 interface divStyle {
     position?:string | undefined,
     backgroundColor?: string | undefined,
@@ -59,7 +59,7 @@ const ToolTipComponent = ({
                 setPosition(" -top-4");//포지션이 안바뀜 left-0만 먹히고 나머지는 아예안먹힘
                 break;
             case "bottom":
-                setPosition("left-0 -bottom-4");
+                setPosition("left-[4px] top-[8px]");
                 break;
             case "left":
                 setPosition("-left-4");
