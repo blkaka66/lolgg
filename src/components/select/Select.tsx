@@ -49,6 +49,7 @@ const SelectComponent = ({
                 variant="outlined"
                 widthSize={widthSize}
                 textSize={textSize}
+
                 onClick={(event) => {
                 event.stopPropagation();
                 handleOnclick();
