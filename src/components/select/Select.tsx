@@ -28,16 +28,20 @@ const SelectComponent = ({
                          }: SelectProps) => {
     const [isAppear, setIsAppear] = useState(false);
 
+
+    const isNestedOption = Array.isArray(data) && 'options' in data[0];
+
+    const id = makeRandomNumber();
+    const [onDefaultValue, setonDefaultValue] = useState(defaultValue);
     const handleOnclick = () => {
         console.log("끼얏호우");
         setIsAppear(!isAppear);
     };
 
     const handleButtonClicked = (itemValue: string) => {
+        setonDefaultValue(itemValue);
         console.log(itemValue);
     };
-
-    const id = makeRandomNumber();
 
     return (
         <div
@@ -50,28 +54,50 @@ const SelectComponent = ({
                 widthSize={widthSize}
                 textSize={textSize}
                 onClick={(event) => {
-                event.stopPropagation();
-                handleOnclick();
-            }}>
-                {defaultValue}
+                    event.stopPropagation();
+                    handleOnclick();
+                }}
+            >
+                {onDefaultValue}
             </ButtonComponent>
             {data &&
                 isAppear &&
-                data.map((item, index) => (
-                    <ButtonComponent
-                        key={index}
-                        variant="outlined"
-                        widthSize={widthSize}
-                        textSize={textSize}
-                        isDisabled={item.hasOwnProperty('disabled') ? item.disabled : false}
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            handleButtonClicked(item.hasOwnProperty('value') ? item.value : "");
-                        }}
-                    >
-                        {item.label}
-                    </ButtonComponent>
-                ))}
+                (isNestedOption
+                    ? (data as NestedOption[]).map((nestedOption, index) => (
+                        <div key={index}>
+                            <ButtonComponent isDisabled={true}>{nestedOption.label}</ButtonComponent>
+                            {nestedOption.options.map((item, nestedIndex) => (
+                                <ButtonComponent
+                                    key={nestedIndex}
+                                    variant="outlined"
+                                    widthSize={widthSize}
+                                    textSize={textSize}
+                                    isDisabled={item.hasOwnProperty('disabled') ? item.disabled : false}
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        handleButtonClicked(item.hasOwnProperty('value') ? item.value : "");
+                                    }}
+                                >
+                                    {item.label}
+                                </ButtonComponent>
+                            ))}
+                        </div>
+                    ))
+                    : (data as Option[]).map((item, index) => (
+                        <ButtonComponent
+                            key={index}
+                            variant="outlined"
+                            widthSize={widthSize}
+                            textSize={textSize}
+                            isDisabled={item.hasOwnProperty('disabled') ? item.disabled : false}
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                handleButtonClicked(item.hasOwnProperty('value') ? item.value : "");
+                            }}
+                        >
+                            {item.label}
+                        </ButtonComponent>
+                    )))}
         </div>
     );
 };

@@ -57,9 +57,10 @@ const ButtonComponent = ({
     let backgroundColor=color;
     let textColor = '';
       switch (widthSize) {
+
           case 'full': width = '100%'; break;
           case 'fit': break;
-          default:3
+          default:
               width = `${widthSize}px`
       }
       if(isDisabled){

@@ -7,6 +7,7 @@ interface ToolTipProps {
     size?: string;
     children?: React.ReactNode;
     bgColor?: string;
+
     textColor?: string;
     trigger?: string;
 
