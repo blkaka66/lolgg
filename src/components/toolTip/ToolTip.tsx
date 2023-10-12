@@ -34,6 +34,7 @@ const ToolTipComponent = ({
 
     const [width , setWidth] =useState("w-4");
     const [height , setHeight] =useState("h-4");
+    const [spanStyle , setSpanStyle] = useState("");
     const id = makeRandomNumber();
     const handleMouseEnter = (event) => {
 
@@ -60,7 +61,7 @@ const ToolTipComponent = ({
                 setPosition(" -top-4");//포지션이 안바뀜 left-0만 먹히고 나머지는 아예안먹힘
                 break;
             case "bottom":
-                setPosition("left-[4px] top-[8px]");
+                setPosition("left-8 -bottom-8");
                 break;
             case "left":
                 setPosition("-left-4");
@@ -93,6 +94,10 @@ const ToolTipComponent = ({
 
 
         }
+
+        setSpanStyle(
+            `absolute ${position}  ${width} ${height} text-center z-50 `
+        );
 
 
         setStyle({
@@ -133,7 +138,7 @@ const ToolTipComponent = ({
                 <span
 
                     //className={`${position} absolute text-center z-50 `}
-                    className={`absolute ${position}  ${width} ${height} text-center z-50 `}
+                    className={spanStyle}
                 >
                     {trigger === "hover" && <span style={style} className={`${isAppear ? "visible" : "invisible"}`}>
                         {isDisabled === true ? "볼 수 없습니다." : title}
