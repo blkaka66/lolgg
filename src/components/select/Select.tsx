@@ -27,7 +27,7 @@ const SelectComponent = ({
                              data,
                          }: SelectProps) => {
     const [isAppear, setIsAppear] = useState(false);
-
+    const [searchKeyword , setSearchKeyword] = useState("");
 
     const isNestedOption = Array.isArray(data) && 'options' in data[0];
 
@@ -49,26 +49,46 @@ const SelectComponent = ({
             className={"relative inline-block border border-black w-12 h-12"}
             onClick={handleOnclick}
         >
-            <ButtonComponent
-                variant="outlined"
-                widthSize={widthSize}
-                textSize={textSize}
+            <input
+                type="text"
+                placeholder={onDefaultValue}
                 onClick={(event) => {
                     event.stopPropagation();
                     handleOnclick();
                 }}
-            >
-                {onDefaultValue}
-            </ButtonComponent>
+                onKeyDown={(event) => {
+
+                    console.log(data)
+                    if (data) {
+                        event.preventDefault();
+                        const lowerCaseInput = event.target.value.toLowerCase();
+                        setSearchKeyword(lowerCaseInput);
+                        setonDefaultValue(event.target.value);
+                        console.log(searchKeyword)
+                        console.log(lowerCaseInput)
+                        const matchingOption = isNestedOption
+                            ? (data as NestedOption[]).forEach(nestedOption =>
+                                nestedOption.label.toLowerCase().includes(lowerCaseInput)
+                            )
+                            : (data as Option[]).find(option => option.label.toLowerCase().includes(lowerCaseInput));
+
+                        if (matchingOption) {
+                            console.log(matchingOption)
+
+                        }
+                    }
+                }}
+            />
+
             {data &&
                 isAppear &&
                 (isNestedOption
                     ? (data as NestedOption[]).map((nestedOption, index) => (
                         <div key={index}>
                             <ButtonComponent isDisabled={true}>{nestedOption.label}</ButtonComponent>
-                            {nestedOption.options.map((item, nestedIndex) => (
+                            {nestedOption.options.map((item, Index) => (
                                 <ButtonComponent
-                                    key={nestedIndex}
+                                    key={Index}
                                     variant="outlined"
                                     widthSize={widthSize}
                                     textSize={textSize}

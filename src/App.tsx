@@ -35,9 +35,10 @@ function App() {
 
 
         <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
-          {/* 툴팁 1*/}
-          {/*<ToolTipComponent title="툴팁내용">*/}
-          {/*  <ButtonComponent*/}
+
+          {/*  툴팁 1*/}
+          {/* <ToolTipComponent title="툴팁내용">*/}
+          {/*   <ButtonComponent*/}
           {/*      variant="contained"*/}
           {/*      widthSize={"fit"}*/}
           {/*      icon={AiFillCaretDown}*/}
