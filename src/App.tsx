@@ -4,18 +4,18 @@ import ButtonComponent from "./components/button/button"
 import ToolTipComponent from "./components/toolTip/ToolTip";
 import SelectComponent from "./components/select/Select.tsx";
 
-const options=[
-        {
-            label: 'Manager',
-            options: [
-                { label: 'Jack', value: 'jack' },
-                { label: 'Lucy', value: 'lucy' },
-            ],
-        },
-{
+const options = [
+  {
+    label: 'Manager',
+    options: [
+      {label: 'Jack', value: 'jack'},
+      {label: 'Lucy', value: 'lucy'},
+    ],
+  },
+  {
     label: 'Engineer',
-        options: [{ label: 'yiminghe', value: 'Yiminghe' }],
-},
+    options: [{label: 'yiminghe', value: 'Yiminghe'}],
+  },
 ]
 
 const data =[
@@ -56,8 +56,7 @@ function App() {
           {/*  <div>마우스를 올리면 툴팁이 보여요!</div>*/}
           {/*</ToolTipComponent>*/}
 
-            <SelectComponent
-            data={options}></SelectComponent>
+          <SelectComponent data={options}></SelectComponent>
        </div>
             )
     }
