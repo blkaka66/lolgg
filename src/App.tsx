@@ -14,7 +14,9 @@ const options = [
   },
   {
     label: 'Engineer',
-    options: [{label: 'yiminghe', value: 'Yiminghe'}],
+    options: [{label: 'yiminghe', value: 'Yiminghe'},
+        {label: 'Jack', value: 'jack'}
+    ],
   },
 ]
 
@@ -22,6 +24,7 @@ const data =[
     { "value": "jack" ,"label": "Jack" },
     { "value": "lucy", "label": "Lucy" },
     { "value": "Yimin", "label": "yiminghe" },
+    { "value": "jack" ,"label": "Jack" },
     { "value": "disab", "label": "ffffff", "disabled": true }
 ]
 
