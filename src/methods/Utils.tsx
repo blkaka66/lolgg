@@ -13,7 +13,7 @@ const ScrollableComponent = ({ children }) => {
             const spaceAbove = containerRect.top;//현재 컴포넌트의 위 여백
             console.log(spaceBelow+"&&&&")
             if (spaceBelow < containerHeight) {//밑 여백이 현재 컴포넌트 height보다 작으면(컴포넌트의 밑 여백이 부족하면)
-                container.style.transform = `translateY(${-spaceBelow}px)`;//위로 렌더링??이게 아닌데
+                container.style.top = `-${containerHeight}px`;//위로 렌더링??이게 아닌데
             }
         }
     };
