@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {makeRandomNumber} from "../../methods/Utils.ts"
+import {makeRandomNumber} from "../../methods/Utils.tsx"
 interface ToolTipProps {
     title: string;
     ttPosition?: "top" | "bottom" | "left" | "right";
@@ -35,6 +35,7 @@ const ToolTipComponent = ({
     const [width , setWidth] =useState("w-4");
     const [height , setHeight] =useState("h-4");
     const [spanStyle , setSpanStyle] = useState("");
+
     const id = makeRandomNumber();
     const handleMouseEnter = (event) => {
 

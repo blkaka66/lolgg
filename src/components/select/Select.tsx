@@ -1,6 +1,6 @@
 import React, {useState, useRef, ChangeEvent, useEffect} from "react";
 import ButtonComponent from "../button/button.tsx";
-import { makeRandomNumber } from "../../methods/Utils.ts";
+import { makeRandomNumber } from "../../methods/Utils.tsx";
 
 interface Option {
     label: string;
