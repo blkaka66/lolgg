@@ -3,7 +3,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 import ButtonComponent from "./components/button/button"
 import ToolTipComponent from "./components/toolTip/ToolTip";
 import SelectComponent from "./components/select/Select.tsx";
-import {ScrollableComponent} from './methods/Utils.tsx';
+import CheckBox from "./components/checkBox/CheckBox.tsx";
 const options = [
   {
     label: 'Manager',
@@ -18,71 +18,6 @@ const options = [
         {label: 'Jack', value: 'jack'}
     ],
   },
-    {
-        label: 'Manager',
-        options: [
-            {label: 'Jack', value: 'jack'},
-            {label: 'Lucy', value: 'lucy'},
-        ],
-    },
-    {
-        label: 'Engineer',
-        options: [{label: 'yiminghe', value: 'Yiminghe'},
-            {label: 'Jack', value: 'jack'}
-        ],
-    },
-    {
-        label: 'Manager',
-        options: [
-            {label: 'Jack', value: 'jack'},
-            {label: 'Lucy', value: 'lucy'},
-        ],
-    },
-    {
-        label: 'Engineer',
-        options: [{label: 'yiminghe', value: 'Yiminghe'},
-            {label: 'Jack', value: 'jack'}
-        ],
-    },
-    {
-        label: 'Manager',
-        options: [
-            {label: 'Jack', value: 'jack'},
-            {label: 'Lucy', value: 'lucy'},
-        ],
-    },
-    {
-        label: 'Engineer',
-        options: [{label: 'yiminghe', value: 'Yiminghe'},
-            {label: 'Jack', value: 'jack'}
-        ],
-    },
-    {
-        label: 'Manager',
-        options: [
-            {label: 'Jack', value: 'jack'},
-            {label: 'Lucy', value: 'lucy'},
-        ],
-    },
-    {
-        label: 'Engineer',
-        options: [{label: 'yiminghe', value: 'Yiminghe'},
-            {label: 'Jack', value: 'jack'}
-        ],
-    },
-    {
-        label: 'Manager',
-        options: [
-            {label: 'Jack', value: 'jack'},
-            {label: 'Lucy', value: 'lucy'},
-        ],
-    },
-    {
-        label: 'Engineer',
-        options: [{label: 'yiminghe', value: 'Yiminghe'},
-            {label: 'Jack', value: 'jack'}
-        ],
-    },
 ]
 
 const data =[
@@ -123,9 +58,9 @@ function App() {
           {/*<ToolTipComponent title={"툴팁!!"}>*/}
           {/*  <div>마우스를 올리면 툴팁이 보여요!</div>*/}
           {/*</ToolTipComponent>*/}
-            <ScrollableComponent>
-          <SelectComponent data={options}></SelectComponent>
-            </ScrollableComponent>
+
+          {/*<SelectComponent data={options}></SelectComponent>*/}
+            <CheckBox></CheckBox>
        </div>
             )
     }

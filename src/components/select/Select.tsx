@@ -175,46 +175,7 @@ const SelectComponent = ({
               isAppear &&
               (
                   renderSelect(matchingResult.length>0 ? matchingResult : data)
-                // <div>
-                //     {
-                //         isNestedOption
-                //           ? (data as NestedOption[]).map((nestedOption, index) => (
-                //             <div key={index}>
-                //                 <ButtonComponent isDisabled={true}>{nestedOption.label}</ButtonComponent>
-                //                 {nestedOption.options.map((item, Index) => (
-                //                   <ButtonComponent
-                //                     key={Index}
-                //                     variant="outlined"
-                //                     widthSize={widthSize}
-                //                     textSize={textSize}
-                //                     isDisabled={item.hasOwnProperty('disabled') ? item.disabled : false}
-                //                     onClick={(event) => {
-                //                         event.stopPropagation();
-                //                         handleButtonClicked(item.hasOwnProperty('value') ? item.value : "");
-                //                     }}
-                //                   >
-                //                       {item.label}
-                //                   </ButtonComponent>
-                //                 ))}
-                //             </div>
-                //           ))
-                //           : (data as Option[]).map((item, index) => (
-                //             <ButtonComponent
-                //               key={index}
-                //               variant="outlined"
-                //               widthSize={widthSize}
-                //               textSize={textSize}
-                //               isDisabled={item.hasOwnProperty('disabled') ? item.disabled : false}
-                //               onClick={(event) => {
-                //                   event.stopPropagation();
-                //                   handleButtonClicked(item.hasOwnProperty('value') ? item.value : "");
-                //               }}
-                //             >
-                //                 {item.label}
-                //             </ButtonComponent>
-                //           ))
-                //     }
-                // </div>
+
               )
             }
         </div>
