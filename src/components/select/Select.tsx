@@ -83,16 +83,16 @@ const SelectComponent = ({
         // setonDefaultValue(event.target.value);
         //console.log(searchKeyword+"^^^")
 
-        const matchingOption = isNestedOption
-            ? data.flatMap(data => {
-                const nestedOptions = data.options.filter(nestedOption =>
-                    nestedOption.label.toLowerCase().includes(lowerCaseInput)
+        const matchingOption = isNestedOption //만약 nested형태면
+            ? data.flatMap(data => { //겉의 label은 flapmap으로 날리고 안쪽의 option만 남겨서
+                const nestedOptions = data.options.filter(nestedOption => //filtering한다
+                    nestedOption.label.toLowerCase().includes(lowerCaseInput)//죄다 소문자로 바꿔서 포함된값을 필터링함
                 );
                 return nestedOptions.length > 0
-                    ? [{ ...data, options: nestedOptions }]
+                    ? [{ ...data, options: nestedOptions }] // 그리고 option에 필터링된값을 덮어씌워서 리턴한다
                     : [];
             })
-            : data.filter(option => option.label.toLowerCase().includes(lowerCaseInput));
+            : data.filter(option => option.label.toLowerCase().includes(lowerCaseInput));//nested형태아니면 그냥 filtering한다.
         setMatchingResult(matchingOption)
         console.log(matchingResult)
 
