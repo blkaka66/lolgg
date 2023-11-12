@@ -13,8 +13,16 @@ interface NestedOption {
     options: Option[];
 }
 
+/**
+ * @param defaultValue: 기본값, 없으면 placeholder로 표시
+ * @param placeholder: 기본값이 없을 때 표시할 문구
+ * @param widthSize: full, fit, number
+ * @param textSize
+ * @param data
+ */
 interface SelectProps {
     defaultValue?: string;
+    placeholder?: string;
     widthSize?: "full" | "fit" | number;
     textSize?: string;
     data: Option[] | NestedOption[];

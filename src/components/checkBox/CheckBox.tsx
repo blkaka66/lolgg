@@ -2,36 +2,46 @@
 import button from "../button/button.tsx";
 import {useEffect, useState} from "react";
 interface CheckBoxProps {
+    type?: 'checked' | 'filled',
     textSize?: string;
     widthSize?:  string;
     isDisabled?: boolean;
     color?:string;
     onClick?: (event: React.MouseEvent) => void;
-    isV?:boolean;
-    isFilled?:boolean;
     vColor?:string;
     fillColor?:string;
+    checked?: boolean;
+    // children?: React.ReactNode;
 }
 
 interface ButtonStyle {
     backgroundColor?: string | undefined,
 
 }
-const CheckBox = ({
-                   textSize = "text-sm",
-                   widthSize = "w-4",
-                   color="transparent",
-                   isV=false,
-                   vColor="green",
-                   isFilled=true,
-                   fillColor="blue",
-                   onClick = (event: React.MouseEvent) => {
 
-                       console.log( 'click!' );
-                       event.stopPropagation();},
-                   isDisabled = false,}:CheckBoxProps) =>{
+// export enum CheckBoxType {
+//   checked = 'checked',
+//   filled = 'filled'
+// }
+
+const CheckBox = ({
+                    type = 'checked',
+                    textSize = "text-sm",
+                    widthSize = "w-4",
+                    color = "transparent",
+                    vColor = "green",
+                    fillColor = "blue",
+                    checked = false,
+                    onClick = (event: React.MouseEvent) => {
+
+                      console.log('click!');
+                      event.stopPropagation();
+                    },
+                    isDisabled = false,
+                    children
+                  }: CheckBoxProps) => {
         const [style, setStyle] = useState<ButtonStyle>({})
-        const [clicked , setIsClicked] = useState(false);
+        const [clicked , setIsClicked] = useState(checked);
 
         useEffect(() => {
             if(isDisabled){
@@ -41,56 +51,53 @@ const CheckBox = ({
 
         }, []);
 
-        const click = (event: React.MouseEvent) =>{
-            let backgroundColor="transparent";
+        useEffect(() => {
 
-            if(!isDisabled)
-            {
-                setIsClicked(!clicked);//왜 두번째 누를때부터 색깔이바뀔까?
-                onClick(event);
+          let backgroundColor="transparent";
 
-                console.log(clicked);
-
-                if(isFilled && clicked){
-                    backgroundColor=fillColor;
-
-                }
-                else if (isV && clicked)
-                {
-
-                }
-                if(!clicked){
-                    backgroundColor=color;
-                }
-
+          if(clicked) {
+            if(type === 'checked'){
+              //
+            } else if(type === 'filled'){
+              backgroundColor = fillColor;
             }
-            setStyle(prevState => {
-                return{
-                    ...prevState,
-                    backgroundColor,
-                }
-            })
+          } else {
+            backgroundColor = color;
+          }
 
+          setStyle(prevState => {
+            return{
+              ...prevState,
+              backgroundColor,
+            }
+          })
+
+        }, [clicked])
+
+        const click = (event: React.MouseEvent) => {
+          if(!isDisabled) {
+            setIsClicked(!clicked);
+            if(onClick) onClick(event);
+          }
         }
 
 
     return (
-        <div
-
+      <div className={`flex cursor-pointer`}
+           onClick={click}>
+        <span
             style={style}
             className={`relative border w-4 h-4 border-black border-solid  bg-${color}`}
-            onClick={click}
         >
-            {isV && clicked && (
-                <span
-                    className={`absolute top-1/2 z-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-${color}`}
-                ></span>//왜안나오지
-            )}
-        </div>
+            {/*{isV && clicked && (*/}
+            {/*    <span*/}
+            {/*        className={`absolute top-1/2 z-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-${color}`}*/}
+            {/*    ></span>//왜안나오지*/}
+            {/*)}*/}
+        </span>
+        <span className={`text-sm ml-2`}>{children}</span>
+      </div>
     );
-
-
-
 }
 
 
