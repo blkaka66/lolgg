@@ -1,5 +1,5 @@
 import CheckBox, {CheckBoxType} from "./components/checkBox/CheckBox.tsx";
-import SelectComponent from "./components/select/Select";
+import SelectComponent from "./components/select/Select2";
 import ToolTipComponent from "./components/toolTip/ToolTip";
 
 const options = [
@@ -77,7 +77,7 @@ function App() {
       {/*  <div>마우스를 올리면 툴팁이 보여요!</div>*/}
       {/*</ToolTipComponent>*/}
 
-      {/*<SelectComponent data={options}></SelectComponent>*/}
+
 
       원하는 것들을 선택해 주세요.
       <ToolTipComponent title={'툴팁!!'}>
@@ -91,11 +91,7 @@ function App() {
       <CheckBox checked={checkBoxData[6]} type={'filled'}>7</CheckBox>
       <CheckBox checked={checkBoxData[7]} type={'filled'}>8</CheckBox>
 
-
-      <Radio data={data} value={'jack'} onChange={(value) => setRadioValue(value)}></Radio>
-
-
-
+      <SelectComponent data={options}></SelectComponent>
     </div>
   )
 }
