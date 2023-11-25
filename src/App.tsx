@@ -79,7 +79,7 @@ function App() {
       {/*</ToolTipComponent>*/}
 
       {/*<SelectComponent data={options}></SelectComponent>*/}
-      <Radiocomponent></Radiocomponent>
+      <Radiocomponent>라디오</Radiocomponent>
 
       {/*<CheckBox checked={checkBoxData[1]} type={'checked'}>2</CheckBox>*/}
 
