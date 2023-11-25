@@ -1,6 +1,7 @@
 
 import button from "../button/button.tsx";
 import {useEffect, useState} from "react";
+import checkedImage from "../../assets/checkSvg.png";
 interface CheckBoxProps {
     type?: 'checked' | 'filled',
     textSize?: string;
@@ -11,7 +12,7 @@ interface CheckBoxProps {
     vColor?:string;
     fillColor?:string;
     checked?: boolean;
-    // children?: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface ButtonStyle {
@@ -43,32 +44,39 @@ const CheckBox = ({
         const [style, setStyle] = useState<ButtonStyle>({})
         const [clicked , setIsClicked] = useState(checked);
 
-        useEffect(() => {
-            if(isDisabled){
-                color="#ccc";
 
-            }//왜 색깔이 안바뀔까?
+        //두번누를떄부터 색깔이바뀔까?->첨 렌더링할때 setstyle을 안해줬기 떄문에 ->useeffect로 맨첨 렌더링할떄부터 setstyle로 backgroundcolor정의해준다.
 
-        }, []);
+
 
         useEffect(() => {
 
           let backgroundColor="transparent";
-
-          if(clicked) {
-            if(type === 'checked'){
-              //
-            } else if(type === 'filled'){
-              backgroundColor = fillColor;
-            }
-          } else {
-            backgroundColor = color;
+          let backgroundImage = "none";
+            let backgroundSize = "auto";
+          if(isDisabled){
+              backgroundColor = "gray";
           }
+          else{
+              if(clicked) {
+                  if(type === 'checked'){
+                      backgroundColor="none";
+                      backgroundImage = `url(${checkedImage})`;
+                      backgroundSize = "cover";
+                  } else if(type === 'filled'){
+                      backgroundColor = fillColor;
+                  }
+              } else {
+                  backgroundColor = color;
+              }
 
+          }
           setStyle(prevState => {
             return{
               ...prevState,
               backgroundColor,
+                backgroundImage,
+                backgroundSize
             }
           })
 

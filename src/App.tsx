@@ -1,7 +1,8 @@
 import CheckBox, {CheckBoxType} from "./components/checkBox/CheckBox.tsx";
-import SelectComponent from "./components/select/Select2";
+import SelectComponent from "./components/select/Select";
 import ToolTipComponent from "./components/toolTip/ToolTip";
-
+import ann from './assets/checkSvg.png'
+import Radiocomponent from './components/radio/Radiocomponent.tsx'
 const options = [
   {
     label: 'Manager',
@@ -77,21 +78,18 @@ function App() {
       {/*  <div>마우스를 올리면 툴팁이 보여요!</div>*/}
       {/*</ToolTipComponent>*/}
 
+      {/*<SelectComponent data={options}></SelectComponent>*/}
+      <Radiocomponent>라디오</Radiocomponent>
 
+      {/*<CheckBox checked={checkBoxData[1]} type={'checked'}>2</CheckBox>*/}
 
-      원하는 것들을 선택해 주세요.
-      <ToolTipComponent title={'툴팁!!'}>
-        <CheckBox checked={checkBoxData[0]} type={'filled'}>1</CheckBox>
-      </ToolTipComponent>
-      <CheckBox checked={checkBoxData[1]} type={'filled'}>2</CheckBox>
-      <CheckBox checked={checkBoxData[2]} type={'filled'}>3</CheckBox>
-      <CheckBox checked={checkBoxData[3]} type={'filled'}>4</CheckBox>
-      <CheckBox checked={checkBoxData[4]} type={'filled'}>5</CheckBox>
-      <CheckBox checked={checkBoxData[5]} type={'filled'}>6</CheckBox>
-      <CheckBox checked={checkBoxData[6]} type={'filled'}>7</CheckBox>
-      <CheckBox checked={checkBoxData[7]} type={'filled'}>8</CheckBox>
 
       <SelectComponent data={options}></SelectComponent>
+
+
+
+
+
     </div>
   )
 }
