@@ -3,6 +3,7 @@ import SelectComponent from "./components/select/Select";
 import ToolTipComponent from "./components/toolTip/ToolTip";
 import ann from './assets/checkSvg.png'
 import Radiocomponent from './components/radio/Radiocomponent.tsx'
+import Radio from './components/radio/Radio.tsx'
 const options = [
   {
     label: 'Manager',
@@ -29,7 +30,7 @@ const data = [
 
 
 const radioSampleData = [
-  {label: 'Jack', value: 'jack'},
+  {label: 'Test', value: 'test'},
   {label: 'Lucy', value: 'lucy'},
   {label: 'Yiminghe', value: 'yiminghe'},
   {label: 'Jack', value: 'jack'}
@@ -79,16 +80,19 @@ function App() {
       {/*</ToolTipComponent>*/}
 
       {/*<SelectComponent data={options}></SelectComponent>*/}
-      <Radiocomponent>라디오</Radiocomponent>
+      {/*<Radiocomponent>라디오</Radiocomponent>*/}
+      {/*<Radiocomponent>라디오</Radiocomponent>*/}
+      {/*<Radiocomponent>라디오</Radiocomponent>*/}
+      {/*<Radiocomponent>라디오</Radiocomponent>*/}
 
-      {/*<CheckBox checked={checkBoxData[1]} type={'checked'}>2</CheckBox>*/}
+      <Radio data={radioSampleData} value={'jack'} onChange={(value) => setRadioValue(value)}>GroupName</Radio>
 
-
+      <div>1</div>
+      <div>1</div>
+      <div>1</div>
+      <div>1</div>
       <SelectComponent data={options}></SelectComponent>
-
-
-
-
+      <CheckBox checked={checkBoxData[1]} type={'checked'}>2</CheckBox>
 
     </div>
   )

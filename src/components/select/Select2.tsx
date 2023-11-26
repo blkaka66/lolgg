@@ -76,15 +76,19 @@ const SelectComponent = ({
 
             // 화면 (View Port) 높이
             const windowHeight = window.innerHeight;
+            console.log("windowHeight: ", windowHeight)
 
             // Select의 InputRefElement의 높이
             const inputRefElementHeight = inputRefElement?.offsetHeight;
+            console.log("inputRefElementHeight: ", inputRefElementHeight)
 
             // 화면 (View Port) 상단에서 inputRefElement까지의 거리
             const inputRefElementTop = inputRefElement?.getBoundingClientRect().top;
+            console.log("inputRefElementTop: ", inputRefElementTop)
 
             // 화면 (View Port) 하단에서 inputRefElement까지의 거리
             const inputRefElementBottom = windowHeight - inputRefElementTop - inputRefElementHeight;
+            console.log("inputRefElementBottom: ", inputRefElementBottom)
 
 
             // 하단이 100px 미만 남았을 때, 위쪽으로 올리기
@@ -136,7 +140,7 @@ const SelectComponent = ({
     const renderSelect = (data) =>{
         return (
 
-            <div className={`absolute max-h-36 w-full overflow-y-auto border-solid border-black border-[0.5px] ${searchPosition}`}>
+            <div className={`absolute w-full border-solid border-black border-[0.5px] ${searchPosition}`}>
                 {
                     isNestedOption
                         ? (data as NestedOption[]).map((nestedOption, index) => (

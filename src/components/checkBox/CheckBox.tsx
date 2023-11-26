@@ -1,6 +1,6 @@
 
 import button from "../button/button.tsx";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import checkedImage from "../../assets/checkSvg.png";
 interface CheckBoxProps {
     type?: 'checked' | 'filled',
@@ -72,11 +72,11 @@ const CheckBox = ({
 
           }
           setStyle(prevState => {
-            return{
+            return {
               ...prevState,
               backgroundColor,
-                backgroundImage,
-                backgroundSize
+              backgroundImage,
+              backgroundSize
             }
           })
 
@@ -103,7 +103,7 @@ const CheckBox = ({
             {/*    ></span>//왜안나오지*/}
             {/*)}*/}
         </span>
-        <span className={`text-sm ml-2`}>{children}</span>
+        <span className={`text-sm ml-2 select-none`}>{children}</span>
       </div>
     );
 }

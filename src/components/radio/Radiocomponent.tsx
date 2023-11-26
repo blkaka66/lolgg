@@ -13,7 +13,7 @@ interface RadioProps{
 
 
 const Radiocomponent = ({
-                            buttonSize= "small",
+                            buttonSize= "medium",
                             textSize = "small",
                             fillColor = "blue",
                             checked = true,
@@ -27,7 +27,7 @@ const Radiocomponent = ({
                         }: RadioProps) => {
 
     const [clicked , setIsClicked] = useState(checked);
-    const [outSidebackgroundColor, setOutSideBackgroundColor] = useState("transparent");
+    const [outSidebackgroundColor, setOutSideBackgroundColor] = useState("bg-transparent");
     const [cursorStyle, setCursorStyle] = useState("cursor-pointer");
     const [inSidebackgroundColor, setinSidebackgroundColor] = useState("transparent");
     const [txtSize , settxtSize] =  useState(textSize);
@@ -93,11 +93,11 @@ const Radiocomponent = ({
 
     return (
         <div
-            className={`relative ${outSidebtnSize} ${cursorStyle} bg-${outSidebackgroundColor} border-solid border-gray-800 rounded-full border-2`}
+            className={`relative ${outSidebtnSize} ${cursorStyle} ${outSidebackgroundColor} border-solid border-gray-800 rounded-full border-2`}
             onClick={clickRadio}
         >
             {clicked && <div className={`absolute ${inSidebtnSize} bg-${inSidebackgroundColor} top-1/4 left-1/4 w-4 h-4 border-solid border-gray-800 rounded-full border-2`}></div>}
-            <span className={`${txtSize} absolute bottom-4`}>{children}</span>
+            <span className={`${txtSize} bottom-4`}>{children}</span>
         {/*    글자가 왜 세로로 나오지??*/}
         </div>
     );

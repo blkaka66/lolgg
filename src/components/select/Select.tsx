@@ -88,10 +88,15 @@ const SelectComponent = ({
     //     };
     // }, []);
 
+    useEffect( () => {
+        console.log("3. isAppear: " + isAppear);
+    },[isAppear])
+
 
 
     const searchEvent = (event) =>{
         setIsAppear(true);
+        console.log("1. isAppear: " + isAppear);
         const lowerCaseInput = event.target.value.toLowerCase();
         console.log(lowerCaseInput);
 
@@ -114,6 +119,8 @@ const SelectComponent = ({
             : data.filter(option => option.label.toLowerCase().includes(lowerCaseInput));//nested형태아니면 그냥 filtering한다.
         setMatchingResult(matchingOption)
         console.log(matchingResult)
+
+        console.log("2. isAppear: " + isAppear);
 
     }
     const renderSelect = (data) =>{
