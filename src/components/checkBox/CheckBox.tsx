@@ -8,11 +8,12 @@ interface CheckBoxProps {
     widthSize?:  string;
     isDisabled?: boolean;
     color?:string;
-    onClick?: (event: React.MouseEvent) => void;
+
     vColor?:string;
     fillColor?:string;
     checked?: boolean;
     children?: React.ReactNode;
+    onChange?: (selectedValue: string) => void;
 }
 
 interface ButtonStyle {
@@ -33,11 +34,7 @@ const CheckBox = ({
                     vColor = "green",
                     fillColor = "blue",
                     checked = false,
-                    onClick = (event: React.MouseEvent) => {
-
-                      console.log('click!');
-                      event.stopPropagation();
-                    },
+                    onChange,
                     isDisabled = false,
                     children
                   }: CheckBoxProps) => {
@@ -85,7 +82,7 @@ const CheckBox = ({
         const click = (event: React.MouseEvent) => {
           if(!isDisabled) {
             setIsClicked(!clicked);
-            if(onClick) onClick(event);
+            if(onChange && typeof (children)=="string") onChange(children);
           }
         }
 

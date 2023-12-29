@@ -29,6 +29,7 @@ interface SelectProps {
     widthSize?: "full" | "fit" | number;
     textSize?: string;
     data: Option[] | NestedOption[];
+    onSelect: (selectedValue: string) => void;
 }
 
 const SelectComponent = ({
@@ -36,6 +37,7 @@ const SelectComponent = ({
                              widthSize = "fit",
                              textSize = "text-lg",
                              data,
+                             onSelect,
                          }: SelectProps) => {
     const [isAppear, setIsAppear] = useState(false);
     const [searchKeyword , setSearchKeyword] = useState("");
@@ -43,6 +45,7 @@ const SelectComponent = ({
     const inputRef = useRef<HTMLInputElement | null>(null);
     const isNestedOption = Array.isArray(data) && 'options' in data[0];
     const [matchingResult, setMatchingResult] = useState<Option[] | NestedOption[]>([]);
+
     let resultValue="";
     // const id = makeRandomNumber();
     const [onDefaultValue, setonDefaultValue] = useState(defaultValue);
@@ -60,7 +63,10 @@ const SelectComponent = ({
             inputRef.current.value = ""; // Reset the input value
         }
         console.log(itemValue);
+
+        onSelect(itemValue);
     };
+
 
     const handleOutsideClick = (event: MouseEvent) => {
         if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -126,7 +132,7 @@ const SelectComponent = ({
     const renderSelect = (data) =>{
         return (
 
-            <div>
+            <div className={"absolute"}>
                 {
                     isNestedOption
                         ? (data as NestedOption[]).map((nestedOption, index) => (

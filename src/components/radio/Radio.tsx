@@ -33,6 +33,7 @@ interface RadioProps {
   fillColor?: string; //체크되면 표시되는 안쪽동그라미의 색깔
   // onClick?: (event: React.MouseEvent) => void;
   children?: React.ReactNode;
+    checked?:string;
 }
 
 
@@ -42,7 +43,7 @@ const Radiocomponent = ({
                           buttonSize = "medium",
                           textSize = "small",
                           fillColor = "blue",
-                          checked = true,
+                          checked = 'null',
                           // onClick = (event: React.MouseEvent) => {
                           //
                           //     console.log('click!');
@@ -58,9 +59,14 @@ const Radiocomponent = ({
 
   const [selectedValue, setSelectedValue] = useState(value);
 
-
+    useEffect(() => {
+        if(checked !== 'null'){
+            setSelectedValue(checked);
+        }
+    }, []);
   const itemClick = (value: string) => {
     setSelectedValue(value);
+    console.log(value)
     onChange(value);
   }
 
