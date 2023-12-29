@@ -24,7 +24,7 @@ interface NestedOption {
 
  */
 interface SelectProps {
-    defaultValue?: string;
+    value?: string | null;
     placeholder?: string;
     widthSize?: "full" | "fit" | number;
     textSize?: string;
@@ -33,7 +33,7 @@ interface SelectProps {
 }
 
 const SelectComponent = ({
-                             defaultValue = "lucy",
+                             value = "lucy",
                              widthSize = "fit",
                              textSize = "text-lg",
                              data,
@@ -48,7 +48,7 @@ const SelectComponent = ({
 
     let resultValue="";
     // const id = makeRandomNumber();
-    const [onDefaultValue, setonDefaultValue] = useState(defaultValue);
+    const [selectedValue, setSelectedValue] = useState(value);
     const handleOnclick = () => {
         console.log("끼얏호우");
         console.log('4');
@@ -56,7 +56,7 @@ const SelectComponent = ({
     };
 
     const handleButtonClicked = (itemValue: string) => {
-        setonDefaultValue(itemValue);
+        setSelectedValue(itemValue);
         resultValue=itemValue;
         setIsAppear(false);
         if (inputRef.current) {
@@ -80,6 +80,10 @@ const SelectComponent = ({
             document.removeEventListener("mousedown", handleOutsideClick);
         }
     }, [])
+
+    useEffect(() => {
+        setSelectedValue(value);
+    }, [value])
 
     // useEffect(() => { //왜 이걸로 이벤트추가하면 실시간으로 검색이안되지?
     //     const inputRefElement = inputRef.current;
@@ -186,7 +190,7 @@ const SelectComponent = ({
             <input
                 ref={inputRef}
                 type="text"
-                placeholder={onDefaultValue}
+                placeholder={selectedValue}
                 onClick={(event) => {
                     event.stopPropagation();
                     handleOnclick();

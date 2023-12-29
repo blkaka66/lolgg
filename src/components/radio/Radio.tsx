@@ -24,7 +24,6 @@ type RadioData = {
 
 interface RadioProps {
   data: RadioData[];
-  value: string;
   onChange: (value: string) => void;
 
   buttonSize?: 'small' | 'medium' | 'large',
@@ -33,17 +32,16 @@ interface RadioProps {
   fillColor?: string; //체크되면 표시되는 안쪽동그라미의 색깔
   // onClick?: (event: React.MouseEvent) => void;
   children?: React.ReactNode;
-    checked?:string;
+  checked?: string | null;
 }
 
 
 const Radiocomponent = ({
                           data,       //라디오버튼의 데이터
-                          value,      //라디오버튼의 값  (선택된 값)
                           buttonSize = "medium",
                           textSize = "small",
                           fillColor = "blue",
-                          checked = 'null',
+                          checked,
                           // onClick = (event: React.MouseEvent) => {
                           //
                           //     console.log('click!');
@@ -57,13 +55,17 @@ const Radiocomponent = ({
                           children
                         }: RadioProps) => {
 
-  const [selectedValue, setSelectedValue] = useState(value);
+  const [selectedValue, setSelectedValue] = useState(checked);
 
     useEffect(() => {
-        if(checked !== 'null'){
+        if(checked){
             setSelectedValue(checked);
+        } else {
+          if(data.length > 0) {
+            setSelectedValue(data[0].value)
+          }
         }
-    }, []);
+    }, [checked]);
   const itemClick = (value: string) => {
     setSelectedValue(value);
     console.log(value)
