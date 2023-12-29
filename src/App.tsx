@@ -5,6 +5,7 @@ import ann from './assets/checkSvg.png'
 import Radiocomponent from './components/radio/Radiocomponent.tsx'
 import {useState} from "react";
 import Radio from './components/radio/Radio.tsx'
+import TextField from "./components/textField/TextField";
 const options = [
   {
     label: 'Manager',
@@ -97,17 +98,17 @@ function App() {
       그럼 만약 radio여러개 있으면 return값을 하나하나 함수 만들어서 받아야 하나?*/}
       {/*<Radiocomponent></Radiocomponent>*/}
 
-      <CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>2</CheckBox>
-      {checkedData}
+      {/*<CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>2</CheckBox>*/}
+      {/*{checkedData}*/}
       {/*<Radio data={radioSampleData} value={'jack'} onChange={(value) => setRadioValue(value)} checked={RadioData}>GroupName</Radio>*/}
       {/*{radioValue}*/}
 
       {/*radio값이나 select의 선택값 같은게 리렌더링 하면 초기화되는게 자연스러운가?
-      만약 유지되어야 한다면 하나하나 전역으로 빼는거말곤 방법이 없나?*/}
+      만약 유지되어야 한다면 전역으로 빼는거말곤 방법이 없나?*/}
 
       {/*<SelectComponent data={options}></SelectComponent>*/}
-      <CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>1</CheckBox>
-
+      {/*<CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>1</CheckBox>*/}
+      <TextField></TextField>
     </div>
   )
 }
