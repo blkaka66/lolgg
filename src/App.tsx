@@ -3,9 +3,10 @@ import SelectComponent from "./components/select/Select";
 import ToolTipComponent from "./components/toolTip/ToolTip";
 import ann from './assets/checkSvg.png'
 import Radiocomponent from './components/radio/Radiocomponent.tsx'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Radio from './components/radio/Radio.tsx'
 import TextField from "./components/textField/TextField";
+import {checkEmail} from "./utils/ValidateUtils";
 const options = [
   {
     label: 'Manager',
@@ -80,6 +81,31 @@ function App() {
   }, [])
 
 
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("submit");
+
+    // form data
+    const formData = new FormData(e.currentTarget);
+    console.log(e.target['email'].value);
+    const result = checkEmail(e.target['email'].value);
+    console.log(result);
+
+  }
+
+
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const result = checkEmail(e.target.value);
+    setEmailError(result.message === 'OK' ? null : result.message);
+    // console.log(result);
+  }
+
+
+
+
   return (
 
 
@@ -127,9 +153,45 @@ function App() {
 
       {/*<SelectComponent data={options}></SelectComponent>*/}
       {/*<CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>1</CheckBox>*/}
-      <TextField category={"passWord"}></TextField>
-      <TextField category={"confirmPassWord"}></TextField>
+      {/*<TextField category={"passWord"}></TextField>*/}
+      {/*<TextField category={"confirmPassWord"}></TextField>*/}
+
+
+      <form onSubmit={handleSubmit}>
+        <Input label="Email" type="text" errorMessage={emailError} onChange={handleEmailChange} />
+        <input type="password" name="password" className="border border-2 border-solid" />
+        <input type="submit" value="Submit"  />
+      </form>
+
+
     </div>
+  )
+}
+
+interface InputProps {
+  label: string;
+  type: string;
+  errorMessage: null | string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+const Input = ({label, type, errorMessage, onChange}:InputProps) => {
+  return (
+    <div className={"flex"}>
+      <div>{label}</div> <TagLabel label="모집중" color="red" /> <TagLabel label="모집완료" color="green" />
+      <input type={type} name="email" className="border border-2 border-solid" onChange={onChange} />
+      {errorMessage && <span className="text-red-600">{errorMessage}</span>}
+    </div>
+  )
+}
+
+interface TagLabelProps {
+  label: string;
+  color: string;
+}
+const TagLabel = ({label, color}: TagLabelProps) => {
+  const colorClassName = color === 'red' ? 'bg-red-200' : 'bg-green-200';
+  return (
+    <span className={`rounded-full bg-red-200 p-2 px-4 ${colorClassName}`}>{label}</span>
   )
 }
 

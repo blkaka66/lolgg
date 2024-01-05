@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import removeMark from "../../assets/x-mark.png";
+// import removeMark from "../../assets/x-mark.png";
 interface TextFieldProps {
   label?:"standard" | "outlined",
   size?:"narrow" |"medium" |"wide",
@@ -158,6 +158,7 @@ const TextField = ({
             <span className={"relative left-0 top-0"}>{inputstate}</span>
             <div style={style} onClick={handleOnclick} className={"relative flex"}>
                 <input value={inputValue}
+                       type={category === "passWord" ? "password" : "text"}
                 onKeyUp={(e) => {
                    const value = e.target.value;
                    if (value.length > 0) {
@@ -169,7 +170,7 @@ const TextField = ({
                 setInputValue(e.target.value);
                 checkValidation(e.target.value);
                 }} placeholder={placeholderr} style={style} ref={inputRef} type="text"></input>
-                <button onClick={deleteInput} className={"relative w-12 h-12"} style={{ backgroundImage: `url(${removeMark})` }}></button>
+                {/*<button onClick={deleteInput} className={"relative w-12 h-12"} style={{ backgroundImage: `url(${removeMark})` }}></button>*/}
                 {/*이거 왜 안보이지???*/}
             </div>
             <div className={"relative text-sm text-red-600 left-2 bottom-0"}>{errorMsg}</div>
