@@ -83,8 +83,7 @@ function App() {
   return (
 
 
-    <div className="border-4 border-red-100 relative h-screen text-center p-10 text-xl">
-      <div>{ selectedData ? `현재 선택된 사람은 ${selectedData} 입니다.` : `아무도 선택하지 않으셨습니다.`}</div>
+    <div>
 
       {/*<input type="text" className="border-2 border-red-100" onChange={(e) => {*/}
       {/*  console.log(e.target.value)*/}
@@ -115,24 +114,21 @@ function App() {
       {/*</ToolTipComponent>*/}
       {/*{selectedData}*/}
 
-      <SelectComponent data={options} value={selectedData}  onSelect={handleSelectedData} ></SelectComponent>
 
-      <SelectComponent data={options} value={selectedData}  onSelect={handleSelectedData} ></SelectComponent>
-      {/*select한 값을 return 하는 방법이 부르는곳에서 handleSelectedData같은거 만들어서 받는거 말곤 없나?
-      그럼 만약 radio여러개 있으면 return값을 하나하나 함수 만들어서 받아야 하나?*/}
+
+
       {/*<Radiocomponent></Radiocomponent>*/}
 
       {/*<CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>2</CheckBox>*/}
       {/*{checkedData}*/}
-      <Radio data={radioSampleData} onChange={(value) => setRadioValue(value)} checked={radioValue}>GroupName</Radio>
+
       {/*{radioValue}*/}
 
-      {/*radio값이나 select의 선택값 같은게 리렌더링 하면 초기화되는게 자연스러운가?
-      만약 유지되어야 한다면 전역으로 빼는거말곤 방법이 없나?*/}
 
       {/*<SelectComponent data={options}></SelectComponent>*/}
       {/*<CheckBox checked={checkBoxData[1]} type={'checked'} onChange={handleCheckedData}>1</CheckBox>*/}
-      <TextField></TextField>
+      <TextField category={"passWord"}></TextField>
+      <TextField category={"confirmPassWord"}></TextField>
     </div>
   )
 }
